@@ -1,0 +1,32 @@
+
+
+# pytest is a library or a framework in python used to work with automation along with either selenium or playwright
+
+
+# pip install pytest
+
+# module name (.py) should starts with "test_" or "_test"
+
+# class name should starts with "Test"
+
+# and function name shouls starts with "test_"
+
+
+# pip install pytest-playwright
+# playwright install
+
+
+#should be install pytest-asyncio or pytest-trio
+
+@pytest.mark.asyncio
+async def test_verifyPageUrl():
+	async with async_playwright() as p:
+		browser = await p.firefox.launch(headless=False)
+		mypage = await browser.new_page()
+		await mypage.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+		await mypage.wait_for_timeout(10000)
+		await expect(mypage).to_have_url("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+		await mypage.pause()
+to run this we have to use this command 
+
+pytest test_login.py -s --headed
